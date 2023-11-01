@@ -28,8 +28,6 @@ WinConditionBoard.prototype.winCheck = function() {
     }
 }
 
-
-
 function moveInput(game, index, player) {
     const playTurn = game;
     const gridMap = {
@@ -73,11 +71,6 @@ function takeTurn(e) {
         document.getElementById("winner").append("O Wins!");
     }
 }
-
-
-
-
-
 
 window.addEventListener("load", function() {
     document.querySelector("table#gameBoard").addEventListener("click", takeTurn);
