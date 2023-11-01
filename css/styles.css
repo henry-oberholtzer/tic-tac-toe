@@ -70,6 +70,14 @@ td:first-of-type {
 tr:first-of-type {
     border-top: 0;
 }
+#success {
+    display: flex;
+    flex-direction: row;
+}
+
+img {
+    margin-top: -700px;
+}
 
 h2 {
     color: #8be5f7;
@@ -77,6 +85,10 @@ h2 {
     font-family: chalk;
     text-align: center;
     opacity: .75;
+}
+
+.hidden {
+    display: none;
 }
 
 @font-face {

@@ -74,8 +74,10 @@ function takeTurn(e) {
     const winState = newGame.winCheck();
     if (winState === "Xwin") {
         document.getElementById("winner").append("X Wins!");
+        document.getElementById("guy").removeAttribute("class");
     } else if (winState === "Owin") {
         document.getElementById("winner").append("O Wins!");
+        document.getElementById("guy").removeAttribute("class");
     }
 }
 
