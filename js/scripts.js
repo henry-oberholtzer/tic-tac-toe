@@ -11,6 +11,27 @@ function WinConditionBoard(row1, row2, row3, col1, col2, col3, diag1, diag2) {
     this.diag2 = diag2;
 }
 
+WinConditionBoard.prototype.winCheck = function() {
+    const keyArray = Object.keys(this)
+    console.log(this);
+    for (i = 0; i < keyArray.length; i++) {
+        const key = keyArray[i]
+        console.log(key);
+        
+        if (this[key].every((value) => {
+            value === "X";
+        })) {
+            console.log("X wins!");
+            break;
+        } else if (this[key].every((value) => {
+            value === "O";
+        })) {
+            console.log("O wins!");
+            break;
+        }
+    }
+}
+
 let newGame = new WinConditionBoard([null, null, null], [null, null, null], [null, null, null], [null, null, null], [null, null, null], [null, null, null], [null, null, null], [null, null, null]);
 
 function moveInput(game, index, player) {
