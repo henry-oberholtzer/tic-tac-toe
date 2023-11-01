@@ -59,7 +59,9 @@ let newGame = new WinConditionBoard([null, null, null], [null, null, null], [nul
 function takeTurn(e) {
     e.preventDefault();
     const playedSquare = e.target.id;
-    console.log(playedSquare);
+    const currentPlayer = document.getElementById("XorO").value;
+    moveInput(newGame, playedSquare, currentPlayer);
+    newGame.winCheck();
 }
 
 
