@@ -11,7 +11,7 @@ function WinConditionBoard(row1, row2, row3, col1, col2, col3, diag1, diag2) {
     this.diag2 = diag2;
 }
 
-WinConditionBoard.prototype.winCheck = function() {
+WinConditionBoard.prototype.winCheck = function () {
     const keyArray = Object.keys(this);
     for (let i = 0; i < keyArray.length; i++) {
         const key = keyArray[i];
@@ -24,7 +24,7 @@ WinConditionBoard.prototype.winCheck = function() {
             return value === "O";
         })) {
             return "Owin";
-        } 
+        }
     }
 }
 
@@ -32,7 +32,7 @@ function moveInput(game, index, player) {
     const playTurn = game;
     const gridMap = {
         0: [["row1", 0], ["col1", 0], ["diag1", 0]],
-        1: [["row1", 1],["col2", 0]],
+        1: [["row1", 1], ["col2", 0]],
         2: [["row1", 2], ["col3", 0], ["diag2", 0]],
         3: [["row2", 0], ["col1", 1]],
         4: [["row2", 1], ["col2", 1], ["diag1", 1], ["diag2", 1]],
@@ -58,20 +58,27 @@ function takeTurn(e) {
     e.preventDefault();
     document.getElementById("winner").innerText = ""
     const playedSquare = e.target.id;
+    let currentPlayer = document.getElementById("XorO").value;
     if (playedSquare !== "played") {
-    const currentPlayer = document.getElementById("XorO").value;
-    document.getElementById(playedSquare).append(currentPlayer);
-    moveInput(newGame, playedSquare, currentPlayer);
-    document.getElementById(playedSquare).setAttribute("id", "played")
+        document.getElementById(playedSquare).append(currentPlayer);
+        moveInput(newGame, playedSquare, currentPlayer);
+        document.getElementById(playedSquare).setAttribute("id", "played")
+        if (currentPlayer === "X") {
+            document.getElementById("O").setAttribute("selected", "true");
+            document.getElementById("X").removeAttribute("selected");
+        } else if (currentPlayer === "O") {
+            document.getElementById("X").setAttribute("selected", "true");
+            document.getElementById("O").removeAttribute("selected");
+        }
     }
     const winState = newGame.winCheck();
     if (winState === "Xwin") {
-    document.getElementById("winner").append("X Wins!");
+        document.getElementById("winner").append("X Wins!");
     } else if (winState === "Owin") {
         document.getElementById("winner").append("O Wins!");
     }
 }
 
-window.addEventListener("load", function() {
+window.addEventListener("load", function () {
     document.querySelector("table#gameBoard").addEventListener("click", takeTurn);
 });
