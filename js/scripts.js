@@ -14,8 +14,7 @@ function WinConditionBoard(row1, row2, row3, col1, col2, col3, diag1, diag2) {
 let newGame = new WinConditionBoard([null, null, null], [null, null, null], [null, null, null], [null, null, null], [null, null, null], [null, null, null], [null, null, null], [null, null, null]);
 
 function moveInput(game, index, player) {
-    const playTurn = game
-    // let game = newGame
+    const playTurn = game;
     const gridMap = {
         0: [["row1", 0], ["col1", 0], ["diag1", 0]],
         1: [["row1", 1],["col2", 0]],
@@ -27,11 +26,10 @@ function moveInput(game, index, player) {
         7: [["row3", 1], ["col2", 2]],
         8: [["row3", 2], ["col3", 2], ["diag1", 2]],
     };
-
-    const playArray = gridMap[index]
-    playArray.forEach((array) => {
-        const colRowDiag = array[0]
-        const index = array[1]
+    const playArray = gridMap[index];
+    playArray.forEach((subArray) => {
+        const colRowDiag = subArray[0];
+        const index = subArray[1];
         playTurn[colRowDiag][index] = player;
     });
     newGame = playTurn;
