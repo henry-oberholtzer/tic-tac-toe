@@ -28,7 +28,7 @@ WinConditionBoard.prototype.winCheck = function() {
     }
 }
 
-let newGame = new WinConditionBoard([null, null, null], [null, null, null], [null, null, null], [null, null, null], [null, null, null], [null, null, null], [null, null, null], [null, null, null]);
+
 
 function moveInput(game, index, player) {
     const playTurn = game;
@@ -51,3 +51,22 @@ function moveInput(game, index, player) {
     });
     newGame = playTurn;
 }
+
+//UI Logic
+
+let newGame = new WinConditionBoard([null, null, null], [null, null, null], [null, null, null], [null, null, null], [null, null, null], [null, null, null], [null, null, null], [null, null, null]);
+
+function takeTurn(e) {
+    e.preventDefault();
+    const playedSquare = e.target.id;
+    console.log(playedSquare);
+}
+
+
+
+
+
+
+window.addEventListener("load", function() {
+    document.querySelector("table#gameBoard").addEventListener("click", takeTurn);
+});
