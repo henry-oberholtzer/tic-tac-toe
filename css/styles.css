@@ -1,9 +1,84 @@
+:root {
+    --border-style: 10px solid #f7f781BB;
+}
+
+body {
+    background-image: url(/img/asphalt.jpeg);
+    background-size: cover;
+    box-sizing: border-box;
+}
+h1 {
+    text-align: center;
+    font-family: chalk;
+    font-size: 100px;
+    color: #ffa6ec;
+    opacity: .65;
+    transform: rotate(1deg);
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+form {
+    color: #8be5f7;
+    font-size: 48px;
+    font-family: chalk;
+    text-align: center;
+    opacity: .75;
+}
+
+select {
+    font-family: chalk;
+    font-size: 80px;
+    background-color: transparent;
+    border: none;
+    height: 80px;
+    color: #ffa6ec;
+    opacity: .95;
+}
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+    table-layout: fixed;
+    max-height: 750px;
+    transform: rotate(5deg);
+}
+
 tr {
-border: 1px solid black;
+    font-family: chalk;
+    font-size: 280px;
+    text-align: center;
+    color: #ffa6ec;
+    opacity: .65;
+    border-top: var(--border-style);
 }
 
 td {
     width: 250px;
     height: 250px;
-    border: 1px solid black;
+    max-width: 250px;
+    max-height: 250px;
+    border-left: var(--border-style);
+}
+
+td:first-of-type { 
+    border-left: 0
+}
+
+tr:first-of-type {
+    border-top: 0;
+}
+
+h2 {
+    color: #8be5f7;
+    font-size: 80px;
+    font-family: chalk;
+    text-align: center;
+    opacity: .75;
+}
+
+@font-face {
+    font-family: chalk;
+    src: url(../fonts/Chalk-Regular.ttf);
 }
