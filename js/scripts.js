@@ -12,3 +12,7 @@ function WinConditionBoard(row1, row2, row3, col1, col2, col3, diag1, diag2) {
 }
 
 const newGame = new WinConditionBoard([null, null, null], [null, null, null], [null, null, null], [null, null, null], [null, null, null], [null, null, null], [null, null, null], [null, null, null]);
+
+function moveInput(index, player) {
+    newGame.row1[index] = player;
+}
