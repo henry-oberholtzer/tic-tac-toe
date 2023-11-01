@@ -19,12 +19,12 @@ WinConditionBoard.prototype.winCheck = function() {
         if (targetKey.every((value) => {
             return value === "X";
         })) {
-            console.log("X wins!");
+            return "Xwin";
         } else if (targetKey.every((value) => {
             return value === "O";
         })) {
-            console.log("O wins!");
-        }
+            return "Owin";
+        } 
     }
 }
 
@@ -58,10 +58,20 @@ let newGame = new WinConditionBoard([null, null, null], [null, null, null], [nul
 
 function takeTurn(e) {
     e.preventDefault();
+    document.getElementById("winner").innerText = ""
     const playedSquare = e.target.id;
+    if (playedSquare !== "played") {
     const currentPlayer = document.getElementById("XorO").value;
+    document.getElementById(playedSquare).append(currentPlayer);
     moveInput(newGame, playedSquare, currentPlayer);
-    newGame.winCheck();
+    document.getElementById(playedSquare).setAttribute("id", "played")
+    }
+    const winState = newGame.winCheck();
+    if (winState === "Xwin") {
+    document.getElementById("winner").append("X Wins!");
+    } else if (winState === "Owin") {
+        document.getElementById("winner").append("O Wins!");
+    }
 }
 
 
