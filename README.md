@@ -31,7 +31,7 @@ newGame = {
     diag2: [null, null, null],
 }
 
-#### Describe moveInput.prototype.moveInput(0);
+#### Describe moveInput.prototype.moveInput(location, player);
 
 Test: It will create a function that takes a board index as an argument and changes the value of an element of an array.
 Code: moveInput(0);
@@ -78,10 +78,28 @@ Test: winCheck() will return which value ("X" or "O") is included in the passing
 Code: newGame.winCheck();
 Expected Result: true, "X"
 
-#### Describe Turn Taking
+#### Describe takeTurn()
 
 Test: It will create a function that first retrieves the value of the toggle.
 Code: takeTurn();
-Expected Result: "X"
+Expected Result: "X";
 
-Test: takeTurn will retrive the value
+Test: takeTurn will accept a value from 0-8 and return the value and a value of the toggle.
+Code: takeTurn(3)
+Expected Result: 3, "X";
+
+Test: takeTurn will pass the value from 0-8 and the value of toggle to moveInput(location, player);
+Code: takeTurn(5)
+Expected Action: moveInput(5, "O");
+
+Test: takeTurn will call winCheck on the game object
+Code: takeTurn(5)
+Expected Action: newGame.winCheck();
+
+Test: If winCheck returns true, take turn returns winner value;
+Code: takeTurn(7);
+Expected result: "X"
+
+Test: If winCheck returns false, calls toggle, no return to user;
+Code: takeTurn(7);
+Expected result: toggle() changes
