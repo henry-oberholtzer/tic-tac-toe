@@ -12,22 +12,18 @@ function WinConditionBoard(row1, row2, row3, col1, col2, col3, diag1, diag2) {
 }
 
 WinConditionBoard.prototype.winCheck = function() {
-    const keyArray = Object.keys(this)
-    console.log(this);
-    for (i = 0; i < keyArray.length; i++) {
-        const key = keyArray[i]
-        console.log(key);
-        
-        if (this[key].every((value) => {
-            value === "X";
+    const keyArray = Object.keys(this);
+    for (let i = 0; i < keyArray.length; i++) {
+        const key = keyArray[i];
+        const targetKey = this[key];
+        if (targetKey.every((value) => {
+            return value === "X";
         })) {
             console.log("X wins!");
-            break;
-        } else if (this[key].every((value) => {
-            value === "O";
+        } else if (targetKey.every((value) => {
+            return value === "O";
         })) {
             console.log("O wins!");
-            break;
         }
     }
 }
@@ -54,5 +50,4 @@ function moveInput(game, index, player) {
         playTurn[colRowDiag][index] = player;
     });
     newGame = playTurn;
-    console.log(newGame);
 }
