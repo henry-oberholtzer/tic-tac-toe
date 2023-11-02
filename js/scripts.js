@@ -85,35 +85,37 @@ function robotMove(squares) {
 
 // // CPU LOGIC
 
-function canCPUwin(game) {
+function canWin(game, player) {
     const winArray = Object.keys(game);
-    const cpuSinglePlay = {};
+    const singlePlay = {};
     winArray.forEach((key) => {
         const gameKey = game[key];
-        if(gameKey.includes("O") && gameKey.includes(null)) {
+        if(gameKey.includes(player) && gameKey.includes(null)) {
             const gameArray = game[key];
-            cpuSinglePlay[key] = gameArray;
+            singlePlay[key] = gameArray;
         }
     });
-    cpuDoublePlay(cpuSinglePlay);
+    doublePlay(singlePlay, player);
 }
 
-function cpuDoublePlay(cpuSinglePlay) {
-    const cpuDoublePlay = {};
-    const singleKeysArray = Object.keys(cpuSinglePlay);
+function doublePlay(singlePlay, player) {
+    const doublePlay = {};
+    const singleKeysArray = Object.keys(singlePlay);
     singleKeysArray.forEach((key) => {
-        const singleArray = cpuSinglePlay[key];
+        const singleArray = singlePlay[key];
         let score = 0;
         singleArray.forEach((val) => {
-            if (val === "O") {
+            if (val === player) {
                 score++;
             }
         })
         if (score > 1 ) {
-            cpuDoublePlay[key] = cpuSinglePlay[key];
+            doublePlay[key] = singlePlay[key];
         }    
     })
-    return cpuDoublePlay;
+    console.log(singlePlay);
+    console.log(doublePlay);
+    return doublePlay;
 }
 
 
