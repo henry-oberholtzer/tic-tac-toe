@@ -64,31 +64,20 @@ function moveInput(game, index, player) {
 }
 
 function removeSquare(object, index) {
-    const toDelete = "num" + index
-    delete object[toDelete]
+    const toDelete = "num" + index;
+    delete object[toDelete];
 }
 
 function randomNumber(max) {
     return Math.floor(Math.random() * max);
 }
 
-// function robotMove(squares) {
-//     setTimeout(() => {
-//         if (Object.values(squares).length > 0) {
-//             const maxInt = Object.values(squares).length;
-//             const moveIndex = randomNumber(maxInt);
-//             const moveChoice = Object.values(squares)[moveIndex]
-//             takeTurnAll(moveChoice);
-//         }
-//     }, 200);
-// }
-
 // // CPU LOGIC
 
 function robotMove(availableSquares) {
     setTimeout(() => {
         if (Object.values(availableSquares).length > 0) {
-            let theMove = canWin(newGame, "X")
+            let theMove = canWin(newGame, "X");
             console.log(theMove);
             takeTurnAll(theMove);
         }
@@ -130,13 +119,13 @@ function formatWinningMove(object) {
     if (Object.keys(object).length > 0) {
         let winningKey = Object.keys(object)[0];
         const array = object[winningKey];
-        let winningIndex = array.findIndex((element) => element === null)
+        let winningIndex = array.findIndex((element) => element === null);
         let winningMove = [winningKey, winningIndex];
         return findWinningMove(winningMove);
     } else {
         const availableMoves = Object.values(availableSquares);
         console.log(availableMoves);
-        const bestMoves = [4,0,2,6,8,1,3,5,7]
+        const bestMoves = [4,0,2,6,8,1,3,5,7];
         for (let i = 0; i < bestMoves.length; i++) {
             console.log(bestMoves[i]);
             const bestPosition = bestMoves[i];
@@ -159,9 +148,9 @@ function findWinningMove(array) {
         7: [["row3", 1], ["col2", 2]],
         8: [["row3", 2], ["col3", 2], ["diag1", 2]],
     };
-    const gridKeys = Object.keys(gridMap)
+    const gridKeys = Object.keys(gridMap);
     for (let i = 0; i < gridKeys.length; i++) {
-        const gridArray = gridMap[i]
+        const gridArray = gridMap[i];
         if (gridArray.toString().includes(array.toString())) {
             console.log(i);
             return i;
@@ -178,10 +167,9 @@ let availableSquares = new BoardSpaces(0, 1, 2, 3, 4, 5, 6, 7, 8);
 
 function takeTurnUser(e) {
     e.preventDefault();
-    document.getElementById("winner").innerText = ""
+    document.getElementById("winner").innerText = "";
     const playedSquare = e.target.id;
     takeTurnAll(playedSquare);
-    // document.querySelector("table#gameBoard").removeEventListener("click", takeTurnUser);
 }
 
 function takeTurnAll(playedSquare) {
@@ -191,7 +179,7 @@ function takeTurnAll(playedSquare) {
         if (playedSquare !== "played") {
             document.getElementById(playedSquare).append(currentPlayer);
             moveInput(newGame, playedSquare, currentPlayer);
-            document.getElementById(playedSquare).setAttribute("id", "played")
+            document.getElementById(playedSquare).setAttribute("id", "played");
             if (currentPlayer === "X") {
                 document.getElementById("O").setAttribute("selected", "true");
                 document.getElementById("X").removeAttribute("selected");
