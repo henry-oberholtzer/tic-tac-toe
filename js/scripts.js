@@ -113,10 +113,20 @@ function doublePlay(singlePlay, player) {
             doublePlay[key] = singlePlay[key];
         }    
     })
-    console.log(singlePlay);
-    console.log(doublePlay);
-    return doublePlay;
+    formatWinningMove(doublePlay);
 }
+
+function formatWinningMove(object) {
+    
+    let winningKey = Object.keys(object)[0];
+    console.log(winningKey)
+    const array = object[winningKey];
+    let winningIndex = array.findIndex((element) => element === null)
+    let winningMove = [winningKey, winningIndex];
+    console.log(winningIndex);
+    console.log(winningMove);
+}
+
 
 
 
