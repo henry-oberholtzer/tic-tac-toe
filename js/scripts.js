@@ -75,7 +75,6 @@ function randomNumber(max) {
 function robotMove(squares) {
     if (Object.values(squares).length > 0) {
         const maxInt = Object.values(squares).length;
-        console.log(maxInt);
         const moveIndex = randomNumber(maxInt);
         const moveChoice = Object.values(squares)[moveIndex]
         takeTurnAll(moveChoice);
@@ -95,21 +94,20 @@ function takeTurnUser(e) {
 }
 
 function takeTurnAll(playedSquare) {
-    console.log(playedSquare);
     let currentPlayer = document.getElementById("XorO").value;
-    if (playedSquare !== "played") {
-        document.getElementById(playedSquare).append(currentPlayer);
-        moveInput(newGame, playedSquare, currentPlayer);
-        document.getElementById(playedSquare).setAttribute("id", "played")
-        if (currentPlayer === "X") {
-            document.getElementById("O").setAttribute("selected", "true");
-            document.getElementById("X").removeAttribute("selected");
-            if (newGame.winCheck() === undefined) {
+    if (newGame.winCheck() === undefined) {
+        if (playedSquare !== "played") {
+            document.getElementById(playedSquare).append(currentPlayer);
+            moveInput(newGame, playedSquare, currentPlayer);
+            document.getElementById(playedSquare).setAttribute("id", "played")
+            if (currentPlayer === "X") {
+                document.getElementById("O").setAttribute("selected", "true");
+                document.getElementById("X").removeAttribute("selected");
                 robotMove(availableSquares);
+            } else if (currentPlayer === "O") {
+                document.getElementById("X").setAttribute("selected", "true");
+                document.getElementById("O").removeAttribute("selected");
             }
-        } else if (currentPlayer === "O") {
-            document.getElementById("X").setAttribute("selected", "true");
-            document.getElementById("O").removeAttribute("selected");
         }
     }
     const winState = newGame.winCheck();
