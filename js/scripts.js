@@ -73,12 +73,14 @@ function randomNumber(max) {
 }
 
 function robotMove(squares) {
+    setTimeout(() => {
     if (Object.values(squares).length > 0) {
         const maxInt = Object.values(squares).length;
         const moveIndex = randomNumber(maxInt);
         const moveChoice = Object.values(squares)[moveIndex]
         takeTurnAll(moveChoice);
     }
+    }, 2000);
 }
 
 //UI Logic
@@ -91,12 +93,12 @@ function takeTurnUser(e) {
     document.getElementById("winner").innerText = ""
     const playedSquare = e.target.id;
     takeTurnAll(playedSquare);
+    document.querySelector("table#gameBoard").removeEventListener("click", takeTurnUser);
 }
 
 function takeTurnAll(playedSquare) {
     let currentPlayer = document.getElementById("XorO").value;
     let numOfPlayers = document.getElementById("1or2").value;
-    console.log(typeof numOfPlayers);
     if (newGame.winCheck() === undefined) {
         if (playedSquare !== "played") {
             document.getElementById(playedSquare).append(currentPlayer);
@@ -125,6 +127,7 @@ function takeTurnAll(playedSquare) {
             document.querySelector("table#gameBoard").removeEventListener("click", takeTurnUser);
         }
     }
+    document.querySelector("table#gameBoard").addEventListener("click", takeTurnUser);
 }
 
 window.addEventListener("load", function () {

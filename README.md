@@ -106,4 +106,16 @@ Expected result: toggle() changes
 
 ### Test Driven Development for Day 2
 
-#### Describe 
+#### Describe canCPUWin?
+
+Test: It returns an object of each value array of newGame that contains an "O".
+Code: canCPUWin(newGame) (CPU has played in space 1)
+Expected Result: { col2: ['O', null, null], row1: ['X', 'O', null] }
+
+Test: It returns an object of each value array of newGame that contains 2 "O"s and null.
+Code: canCPUWin(newGame) (CPU has played in spaces 3 and 4, while user has played in spaces 0, 1, and 6)
+Expected Result: { row2: ['O', 'O', null] }
+
+Test: It will return an array of possible winning moves, where each element is structured as such: [key, index of (value === null)]
+Code: canCPUWin(newGame) (CPU has played in spaces 3 and 4, while user has played in spaces 0, 1, and 6)
+Expected Result: [["row2", 2]]
