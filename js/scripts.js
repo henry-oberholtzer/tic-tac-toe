@@ -73,11 +73,13 @@ function randomNumber(max) {
 }
 
 function robotMove(squares) {
-    const maxInt = Object.values(squares).length;
-    console.log(maxInt);
-    const moveIndex = randomNumber(maxInt);
-    const moveChoice = Object.values(squares)[moveIndex]
-    takeTurnAll(moveChoice);
+    if (Object.values(squares).length > 0) {
+        const maxInt = Object.values(squares).length;
+        console.log(maxInt);
+        const moveIndex = randomNumber(maxInt);
+        const moveChoice = Object.values(squares)[moveIndex]
+        takeTurnAll(moveChoice);
+    }
 }
 
 //UI Logic
@@ -102,7 +104,7 @@ function takeTurnAll(playedSquare) {
         if (currentPlayer === "X") {
             document.getElementById("O").setAttribute("selected", "true");
             document.getElementById("X").removeAttribute("selected");
-            if (newGame.winCheck() === undefined){
+            if (newGame.winCheck() === undefined) {
                 robotMove(availableSquares);
             }
         } else if (currentPlayer === "O") {
