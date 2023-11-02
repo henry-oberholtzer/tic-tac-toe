@@ -3,7 +3,7 @@
 }
 
 body {
-    background-image: url(/img/asphalt.jpeg);
+    background-image: url(../img/asphalt.jpeg);
     background-size: cover;
     box-sizing: border-box;
 }
