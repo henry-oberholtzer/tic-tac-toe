@@ -129,17 +129,21 @@ function doublePlay(singlePlay, player) {
 function formatWinningMove(object) {
     if (Object.keys(object).length > 0) {
         let winningKey = Object.keys(object)[0];
-        console.log(winningKey)
         const array = object[winningKey];
         let winningIndex = array.findIndex((element) => element === null)
         let winningMove = [winningKey, winningIndex];
         return findWinningMove(winningMove);
     } else {
-        const maxInt = Object.values(availableSquares).length;
-        const moveIndex = randomNumber(maxInt);
-        const moveChoice = Object.values(availableSquares)[moveIndex];
-        console.log(moveChoice);
-        return moveChoice;
+        const availableMoves = Object.values(availableSquares);
+        console.log(availableMoves);
+        const bestMoves = [4,0,2,6,8,1,3,5,7]
+        for (let i = 0; i < bestMoves.length; i++) {
+            console.log(bestMoves[i]);
+            const bestPosition = bestMoves[i];
+            if (availableMoves.includes(bestPosition)) {
+                return bestMoves[i];
+            }
+        }
     }
 }
 
