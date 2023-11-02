@@ -11,6 +11,18 @@ function WinConditionBoard(row1, row2, row3, col1, col2, col3, diag1, diag2) {
     this.diag2 = diag2;
 }
 
+function BoardSpaces(num0, num1, num2, num3, num4, num5, num6, num7, num8) {
+    this.num0 = num0;
+    this.num1 = num1;
+    this.num2 = num2;
+    this.num3 = num3;
+    this.num4 = num4;
+    this.num5 = num5;
+    this.num6 = num6;
+    this.num7 = num7;
+    this.num8 = num8;
+}
+
 WinConditionBoard.prototype.winCheck = function () {
     const keyArray = Object.keys(this);
     for (let i = 0; i < keyArray.length; i++) {
@@ -47,12 +59,19 @@ function moveInput(game, index, player) {
         const index = subArray[1];
         playTurn[colRowDiag][index] = player;
     });
+    removeSquare(availableSquares, index);
     newGame = playTurn;
+}
+
+function removeSquare(object, index) {
+    const toDelete = "num" + index
+    delete object[toDelete]
 }
 
 //UI Logic
 
 let newGame = new WinConditionBoard([null, null, null], [null, null, null], [null, null, null], [null, null, null], [null, null, null], [null, null, null], [null, null, null], [null, null, null]);
+let availableSquares = new BoardSpaces(0, 1, 2, 3, 4, 5, 6, 7, 8);
 
 function takeTurn(e) {
     e.preventDefault();
