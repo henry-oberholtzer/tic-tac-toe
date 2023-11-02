@@ -68,15 +68,32 @@ function removeSquare(object, index) {
     delete object[toDelete]
 }
 
+function randomNumber(max) {
+    return Math.floor(Math.random() * max);
+}
+
+function robotMove(squares) {
+    const maxInt = Object.values(squares).length;
+    console.log(maxInt);
+    const moveIndex = randomNumber(maxInt);
+    const moveChoice = Object.values(squares)[moveIndex]
+    takeTurnAll(moveChoice);
+}
+
 //UI Logic
 
 let newGame = new WinConditionBoard([null, null, null], [null, null, null], [null, null, null], [null, null, null], [null, null, null], [null, null, null], [null, null, null], [null, null, null]);
 let availableSquares = new BoardSpaces(0, 1, 2, 3, 4, 5, 6, 7, 8);
 
-function takeTurn(e) {
+function takeTurnUser(e) {
     e.preventDefault();
     document.getElementById("winner").innerText = ""
     const playedSquare = e.target.id;
+    takeTurnAll(playedSquare);
+}
+
+function takeTurnAll(playedSquare) {
+    console.log(playedSquare);
     let currentPlayer = document.getElementById("XorO").value;
     if (playedSquare !== "played") {
         document.getElementById(playedSquare).append(currentPlayer);
@@ -85,6 +102,8 @@ function takeTurn(e) {
         if (currentPlayer === "X") {
             document.getElementById("O").setAttribute("selected", "true");
             document.getElementById("X").removeAttribute("selected");
+            robotMove(availableSquares);
+
         } else if (currentPlayer === "O") {
             document.getElementById("X").setAttribute("selected", "true");
             document.getElementById("O").removeAttribute("selected");
@@ -101,5 +120,5 @@ function takeTurn(e) {
 }
 
 window.addEventListener("load", function () {
-    document.querySelector("table#gameBoard").addEventListener("click", takeTurn);
+    document.querySelector("table#gameBoard").addEventListener("click", takeTurnUser);
 });
