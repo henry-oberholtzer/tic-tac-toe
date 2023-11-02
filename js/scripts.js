@@ -102,8 +102,9 @@ function takeTurnAll(playedSquare) {
         if (currentPlayer === "X") {
             document.getElementById("O").setAttribute("selected", "true");
             document.getElementById("X").removeAttribute("selected");
-            robotMove(availableSquares);
-
+            if (newGame.winCheck() === undefined){
+                robotMove(availableSquares);
+            }
         } else if (currentPlayer === "O") {
             document.getElementById("X").setAttribute("selected", "true");
             document.getElementById("O").removeAttribute("selected");
