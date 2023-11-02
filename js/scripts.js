@@ -74,12 +74,12 @@ function randomNumber(max) {
 
 function robotMove(squares) {
     setTimeout(() => {
-    if (Object.values(squares).length > 0) {
-        const maxInt = Object.values(squares).length;
-        const moveIndex = randomNumber(maxInt);
-        const moveChoice = Object.values(squares)[moveIndex]
-        takeTurnAll(moveChoice);
-    }
+        if (Object.values(squares).length > 0) {
+            const maxInt = Object.values(squares).length;
+            const moveIndex = randomNumber(maxInt);
+            const moveChoice = Object.values(squares)[moveIndex]
+            takeTurnAll(moveChoice);
+        }
     }, 200);
 }
 
@@ -90,7 +90,7 @@ function canWin(game, player) {
     const singlePlay = {};
     winArray.forEach((key) => {
         const gameKey = game[key];
-        if(gameKey.includes(player) && gameKey.includes(null)) {
+        if (gameKey.includes(player) && gameKey.includes(null)) {
             const gameArray = game[key];
             singlePlay[key] = gameArray;
         }
@@ -109,24 +109,43 @@ function doublePlay(singlePlay, player) {
                 score++;
             }
         })
-        if (score > 1 ) {
+        if (score > 1) {
             doublePlay[key] = singlePlay[key];
-        }    
+        }
     })
     formatWinningMove(doublePlay);
 }
 
 function formatWinningMove(object) {
-    
     let winningKey = Object.keys(object)[0];
     console.log(winningKey)
     const array = object[winningKey];
     let winningIndex = array.findIndex((element) => element === null)
     let winningMove = [winningKey, winningIndex];
-    console.log(winningIndex);
-    console.log(winningMove);
+    findWinningMove(winningMove);
 }
 
+function findWinningMove(array) {
+    const gridMap = {
+        0: [["row1", 0], ["col1", 0], ["diag1", 0]],
+        1: [["row1", 1], ["col2", 0]],
+        2: [["row1", 2], ["col3", 0], ["diag2", 0]],
+        3: [["row2", 0], ["col1", 1]],
+        4: [["row2", 1], ["col2", 1], ["diag1", 1], ["diag2", 1]],
+        5: [["row2", 2], ["col3", 1]],
+        6: [["row3", 0], ["col1", 2], ["diag2", 2]],
+        7: [["row3", 1], ["col2", 2]],
+        8: [["row3", 2], ["col3", 2], ["diag1", 2]],
+    };
+    const gridKeys = Object.keys(gridMap)
+    for (let i = 0; i < gridKeys.length; i++) {
+        const gridArray = gridMap[i]
+        if (gridArray.toString().includes(array.toString())) {
+            console.log(i);
+            return i;
+        }
+    }
+}
 
 
 
@@ -156,7 +175,7 @@ function takeTurnAll(playedSquare) {
                 document.getElementById("X").removeAttribute("selected");
                 if (numOfPlayers === "1") {
                     robotMove(availableSquares);
-                } 
+                }
             } else if (currentPlayer === "O") {
                 document.getElementById("X").setAttribute("selected", "true");
                 document.getElementById("O").removeAttribute("selected");
