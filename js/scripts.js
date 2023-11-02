@@ -80,10 +80,45 @@ function robotMove(squares) {
         const moveChoice = Object.values(squares)[moveIndex]
         takeTurnAll(moveChoice);
     }
-    }, 2000);
+    }, 200);
 }
 
-//UI Logic
+// // CPU LOGIC
+
+function canCPUwin(game) {
+    const winArray = Object.keys(game);
+    const cpuSinglePlay = {};
+    winArray.forEach((key) => {
+        const gameKey = game[key];
+        if(gameKey.includes("O") && gameKey.includes(null)) {
+            const gameArray = game[key];
+            cpuSinglePlay[key] = gameArray;
+        }
+    });
+    cpuDoublePlay(cpuSinglePlay);
+}
+
+function cpuDoublePlay(cpuSinglePlay) {
+    const cpuDoublePlay = {};
+    const singleKeysArray = Object.keys(cpuSinglePlay);
+    singleKeysArray.forEach((key) => {
+        const singleArray = cpuSinglePlay[key];
+        let score = 0;
+        singleArray.forEach((val) => {
+            if (val === "O") {
+                score++;
+            }
+        })
+        if (score > 1 ) {
+            cpuDoublePlay[key] = cpuSinglePlay[key];
+        }    
+    })
+    return cpuDoublePlay;
+}
+
+
+
+// UI Logic
 
 let newGame = new WinConditionBoard([null, null, null], [null, null, null], [null, null, null], [null, null, null], [null, null, null], [null, null, null], [null, null, null], [null, null, null]);
 let availableSquares = new BoardSpaces(0, 1, 2, 3, 4, 5, 6, 7, 8);
@@ -93,7 +128,7 @@ function takeTurnUser(e) {
     document.getElementById("winner").innerText = ""
     const playedSquare = e.target.id;
     takeTurnAll(playedSquare);
-    document.querySelector("table#gameBoard").removeEventListener("click", takeTurnUser);
+    // document.querySelector("table#gameBoard").removeEventListener("click", takeTurnUser);
 }
 
 function takeTurnAll(playedSquare) {
@@ -108,9 +143,8 @@ function takeTurnAll(playedSquare) {
                 document.getElementById("O").setAttribute("selected", "true");
                 document.getElementById("X").removeAttribute("selected");
                 if (numOfPlayers === "1") {
-                    
                     robotMove(availableSquares);
-                }
+                } 
             } else if (currentPlayer === "O") {
                 document.getElementById("X").setAttribute("selected", "true");
                 document.getElementById("O").removeAttribute("selected");
