@@ -72,18 +72,28 @@ function randomNumber(max) {
     return Math.floor(Math.random() * max);
 }
 
-function robotMove(squares) {
+// function robotMove(squares) {
+//     setTimeout(() => {
+//         if (Object.values(squares).length > 0) {
+//             const maxInt = Object.values(squares).length;
+//             const moveIndex = randomNumber(maxInt);
+//             const moveChoice = Object.values(squares)[moveIndex]
+//             takeTurnAll(moveChoice);
+//         }
+//     }, 200);
+// }
+
+// // CPU LOGIC
+
+function robotMove(availableSquares) {
     setTimeout(() => {
-        if (Object.values(squares).length > 0) {
-            const maxInt = Object.values(squares).length;
-            const moveIndex = randomNumber(maxInt);
-            const moveChoice = Object.values(squares)[moveIndex]
-            takeTurnAll(moveChoice);
+        if (Object.values(availableSquares).length > 0) {
+            let theMove = canWin(newGame, "X")
+            console.log(theMove);
+            takeTurnAll(theMove);
         }
     }, 200);
 }
-
-// // CPU LOGIC
 
 function canWin(game, player) {
     const winArray = Object.keys(game);
@@ -95,7 +105,7 @@ function canWin(game, player) {
             singlePlay[key] = gameArray;
         }
     });
-    doublePlay(singlePlay, player);
+    return doublePlay(singlePlay, player);
 }
 
 function doublePlay(singlePlay, player) {
@@ -113,16 +123,24 @@ function doublePlay(singlePlay, player) {
             doublePlay[key] = singlePlay[key];
         }
     })
-    formatWinningMove(doublePlay);
+    return formatWinningMove(doublePlay);
 }
 
 function formatWinningMove(object) {
-    let winningKey = Object.keys(object)[0];
-    console.log(winningKey)
-    const array = object[winningKey];
-    let winningIndex = array.findIndex((element) => element === null)
-    let winningMove = [winningKey, winningIndex];
-    findWinningMove(winningMove);
+    if (Object.keys(object).length > 0) {
+        let winningKey = Object.keys(object)[0];
+        console.log(winningKey)
+        const array = object[winningKey];
+        let winningIndex = array.findIndex((element) => element === null)
+        let winningMove = [winningKey, winningIndex];
+        return findWinningMove(winningMove);
+    } else {
+        const maxInt = Object.values(availableSquares).length;
+        const moveIndex = randomNumber(maxInt);
+        const moveChoice = Object.values(availableSquares)[moveIndex];
+        console.log(moveChoice);
+        return moveChoice;
+    }
 }
 
 function findWinningMove(array) {
