@@ -109,14 +109,16 @@ function takeTurnAll(playedSquare) {
                 document.getElementById("O").removeAttribute("selected");
             }
         }
-    }
-    const winState = newGame.winCheck();
-    if (winState === "Xwin") {
-        document.getElementById("winner").append("X Wins!");
-        document.getElementById("guy").removeAttribute("class");
-    } else if (winState === "Owin") {
-        document.getElementById("winner").append("O Wins!");
-        document.getElementById("guy").removeAttribute("class");
+        const winState = newGame.winCheck();
+        if (winState === "Xwin") {
+            document.getElementById("winner").innerText = "X Wins!";
+            document.getElementById("guy").removeAttribute("class");
+            document.querySelector("table#gameBoard").removeEventListener("click", takeTurnUser);
+        } else if (winState === "Owin") {
+            document.getElementById("winner").innerText = "O Wins!";
+            document.getElementById("guy").removeAttribute("class");
+            document.querySelector("table#gameBoard").removeEventListener("click", takeTurnUser);
+        }
     }
 }
 
