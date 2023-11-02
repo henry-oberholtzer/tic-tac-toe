@@ -95,6 +95,8 @@ function takeTurnUser(e) {
 
 function takeTurnAll(playedSquare) {
     let currentPlayer = document.getElementById("XorO").value;
+    let numOfPlayers = document.getElementById("1or2").value;
+    console.log(typeof numOfPlayers);
     if (newGame.winCheck() === undefined) {
         if (playedSquare !== "played") {
             document.getElementById(playedSquare).append(currentPlayer);
@@ -103,7 +105,10 @@ function takeTurnAll(playedSquare) {
             if (currentPlayer === "X") {
                 document.getElementById("O").setAttribute("selected", "true");
                 document.getElementById("X").removeAttribute("selected");
-                robotMove(availableSquares);
+                if (numOfPlayers === "1") {
+                    
+                    robotMove(availableSquares);
+                }
             } else if (currentPlayer === "O") {
                 document.getElementById("X").setAttribute("selected", "true");
                 document.getElementById("O").removeAttribute("selected");

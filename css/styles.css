@@ -34,8 +34,10 @@ select {
     height: 80px;
     color: #ffa6ec;
     opacity: .95;
-    pointer-events: none;
+}
 
+#XorO {
+    pointer-events: none;
 }
 
 table {
